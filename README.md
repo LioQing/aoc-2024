@@ -4,7 +4,7 @@ My advent of code completion in 2024.
 
 ## Environment Setup
 
-Copy the `.env.example` file to `.env` and fill in the values.
+Copy the `.env.example` file to `.env` and fill in your `SESSION`cookie from the advent of code website.
 
 ## Usage
 

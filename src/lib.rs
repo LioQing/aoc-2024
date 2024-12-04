@@ -4,9 +4,9 @@ pub fn input(day: u8) -> String {
 
     let client = reqwest::blocking::Client::new();
 
-    let input_url = std::env::var("INPUT_URL")
-        .unwrap()
-        .replace("{day}", &day.to_string());
+    const URL: &str = "https://adventofcode.com/2024/day/{day}/input";
+
+    let input_url = URL.replace("{day}", &day.to_string());
 
     let request = client
         .request(reqwest::Method::GET, &input_url)
