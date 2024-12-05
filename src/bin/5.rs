@@ -30,8 +30,12 @@ fn solution_part_1(rules: &HashSet<(i32, i32)>, orders: &[Vec<i32>]) -> i32 {
             order
                 .iter()
                 .copied()
-                .tuple_combinations()
-                .all(|(a, b)| rules.contains(&(a, b)))
+                .sorted_by(|a, b| match rules.contains(&(*a, *b)) {
+                    true => std::cmp::Ordering::Less,
+                    false => std::cmp::Ordering::Greater,
+                })
+                .zip(order.iter().copied())
+                .all(|(a, b)| a == b)
         })
         .map(|order| order.get(order.len() / 2).unwrap())
         .sum()
@@ -40,24 +44,21 @@ fn solution_part_1(rules: &HashSet<(i32, i32)>, orders: &[Vec<i32>]) -> i32 {
 fn solution_part_2(rules: &HashSet<(i32, i32)>, orders: &[Vec<i32>]) -> i32 {
     orders
         .iter()
-        .filter(|order| {
-            order
-                .iter()
-                .copied()
-                .tuple_combinations()
-                .any(|(a, b)| !rules.contains(&(a, b)))
-        })
-        .map(|order| {
-            order
+        .filter_map(|order| {
+            match order
                 .iter()
                 .copied()
                 .sorted_by(|a, b| match rules.contains(&(*a, *b)) {
                     true => std::cmp::Ordering::Less,
-                    _ => std::cmp::Ordering::Greater,
+                    false => std::cmp::Ordering::Greater,
                 })
                 .collect_vec()
+            {
+                sorted if &sorted == order => None,
+                sorted => Some(sorted),
+            }
         })
-        .map(|order| *order.get(order.len() / 2).unwrap())
+        .map(|order| order.get(order.len() / 2).copied().unwrap())
         .sum()
 }
 
