@@ -57,7 +57,7 @@ fn solution_part_2(rules: &HashSet<(i32, i32)>, orders: &[Vec<i32>]) -> i32 {
                 })
                 .collect_vec()
         })
-        .map(|order| *order.get(order.len() / 2).unwrap_or(&0))
+        .map(|order| *order.get(order.len() / 2).unwrap())
         .sum()
 }
 
