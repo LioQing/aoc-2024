@@ -92,13 +92,15 @@ fn solution_part_2(input: &str) -> i32 {
         .scan(
             Extractor::from(input.lines().map(str::as_bytes)),
             |extractor, (row, col)| {
-                [
-                    extractor.back_diag(row, col),
-                    extractor.forward_diag(row, col),
-                ]
-                .iter()
-                .all(|xs| matches!(xs.as_ref(), Some(b"MAS") | Some(b"SAM")))
-                .into()
+                [Extractor::back_diag, Extractor::forward_diag]
+                    .iter()
+                    .all(|extract| {
+                        matches!(
+                            extract(extractor, row, col).as_ref(),
+                            Some(b"MAS") | Some(b"SAM")
+                        )
+                    })
+                    .into()
             },
         )
         .filter(|x| *x)

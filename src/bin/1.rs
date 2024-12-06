@@ -1,7 +1,3 @@
-#![allow(unstable_name_collisions)]
-
-use std::collections::HashMap;
-
 use itertools::Itertools;
 
 use aoc_2024::input;
@@ -27,12 +23,11 @@ fn solution_part_1(xs: &[i32], ys: &[i32]) -> i32 {
 }
 
 fn solution_part_2(xs: &[i32], ys: &[i32]) -> i32 {
-    let counts = ys.iter().fold(HashMap::new(), |mut counts, y| {
-        counts.entry(y).and_modify(|count| *count += 1).or_insert(1);
-        counts
-    });
+    let counts = ys.iter().counts();
 
-    xs.iter().map(|x| x * counts.get(x).unwrap_or(&0)).sum()
+    xs.iter()
+        .map(|x| x * counts.get(x).copied().unwrap_or(0) as i32)
+        .sum()
 }
 
 fn main() {
