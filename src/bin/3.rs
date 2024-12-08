@@ -134,7 +134,7 @@ fn solution_part_1(input: &str) -> i32 {
             Tokenizer::close_brac,
             Tokenizer::fail,
         ])
-        .tuple_windows::<(_, _, _, _, _)>()
+        .tuple_windows()
         .filter_map(|toks| match toks {
             (Token::Mul, Token::Num(a), Token::Comma, Token::Num(b), Token::CloseBrac) => {
                 Some(a * b)
@@ -156,7 +156,7 @@ fn solution_part_2(input: &str) -> i32 {
             Tokenizer::dont,
             Tokenizer::fail,
         ])
-        .tuple_windows::<(_, _, _, _, _)>()
+        .tuple_windows()
         .filter_map(|toks| match toks {
             (Token::Mul, Token::Num(a), Token::Comma, Token::Num(b), Token::CloseBrac) => {
                 Some(Command::Mul(a, b))

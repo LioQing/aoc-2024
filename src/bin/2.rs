@@ -41,9 +41,9 @@ fn solution_part_1(xss: &[Vec<i32>]) -> i32 {
     xss.iter()
         .filter(|xs| {
             xs.iter()
-                .tuple_windows::<(_, _)>()
+                .tuple_windows()
                 .map(|(a, b)| Change::from_i32(b - a))
-                .tuple_windows::<(_, _)>()
+                .tuple_windows()
                 .all(|(a, b)| a.is_good_with(b))
         })
         .count() as i32
@@ -59,9 +59,9 @@ fn solution_part_2(xss: &[Vec<i32>]) -> i32 {
                         true => None,
                         false => Some(x),
                     })
-                    .tuple_windows::<(_, _)>()
+                    .tuple_windows()
                     .map(|(a, b)| Change::from_i32(b - a))
-                    .tuple_windows::<(_, _)>()
+                    .tuple_windows()
                     .all(|(a, b)| a.is_good_with(b))
             })
         })
