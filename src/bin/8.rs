@@ -60,20 +60,23 @@ fn solution_part_2(map: &[Vec<u8>]) -> i32 {
             antennas
         })
         .into_values()
-        .flat_map(|poss| {
-            poss.into_iter().tuple_combinations().flat_map(|(a, b)| {
-                [b, a]
-                    .into_iter()
-                    .zip([b - a, a - b])
-                    .flat_map(|(pos, step)| {
-                        std::iter::repeat(step)
-                            .enumerate()
-                            .map(move |(i, step)| pos + step * i as i32)
-                            .take_while(|antinode| {
-                                (antinode.cmpge(IVec2::ZERO) & antinode.cmplt(size)).all()
-                            })
-                    })
-            })
+        .flat_map(|antennas| {
+            antennas
+                .into_iter()
+                .tuple_combinations()
+                .flat_map(|(a, b)| {
+                    [b, a]
+                        .into_iter()
+                        .zip([b - a, a - b])
+                        .flat_map(|(pos, step)| {
+                            std::iter::repeat(step)
+                                .enumerate()
+                                .map(move |(i, step)| pos + step * i as i32)
+                                .take_while(|antinode| {
+                                    (antinode.cmpge(IVec2::ZERO) & antinode.cmplt(size)).all()
+                                })
+                        })
+                })
         })
         .unique()
         .count() as i32
