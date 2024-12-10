@@ -8,7 +8,9 @@ My advent of code completion in 2024.
 - Use a Rusty approach with extensive use of iterators and functional programming unless it affects readability in some instances.
 - Use only the standard library and [itertools](https://crates.io/crates/itertools) (Edit: and other few other essential ones, see notes below).
 
-**Notes**: On day 8, I realized linear algebra operations are quite frequently used, so I added [glam](https://docs.rs/glam/latest/glam/) to the list of dependencies.
+**Notes**:
+- On day 8, I realized linear algebra operations are quite frequently used, so I added [glam](https://crates.io/crates/glam) to the list of dependencies.
+- On day 10, I also added [ndarray](https://crates.io/crates/ndarray).
 
 ## Environment Setup
 
