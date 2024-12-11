@@ -10,7 +10,6 @@ My advent of code completion in 2024.
 
 **Notes**:
 - On day 8, I realized linear algebra operations are quite frequently used, so I added [glam](https://crates.io/crates/glam) to the list of dependencies.
-- On day 10, I also added [ndarray](https://crates.io/crates/ndarray).
 
 ## Environment Setup
 
