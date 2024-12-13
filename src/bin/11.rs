@@ -55,7 +55,6 @@ fn solution(stones: &[i64], blink_count: usize) -> i64 {
 
 fn main() {
     let input = input(11);
-    // let input = "125 17".to_string();
 
     let stones = parse_input(&input);
 
