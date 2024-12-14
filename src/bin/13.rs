@@ -116,7 +116,7 @@ fn solution_part_2(machines: &[Machine]) -> i64 {
                 return p.x / b.x * machine.b.cost as i64;
             }
 
-            let det = a.y * -b.x - b.y * -a.x;
+            let det = a.perp_dot(b);
 
             if det == 0 {
                 if p % a == I64Vec2::ZERO && matches!(p / a, coeff if coeff.x == coeff.y) {
@@ -126,7 +126,7 @@ fn solution_part_2(machines: &[Machine]) -> i64 {
                 }
             }
 
-            let c = -b * (-a.x * p.y + a.y * p.x);
+            let c = -b * p.perp_dot(a);
 
             if c % det != I64Vec2::ZERO {
                 return 0;
