@@ -10,13 +10,13 @@ use nom::{
     IResult,
 };
 
-#[derive(Debug)]
-struct Robot {
-    p: IVec2,
-    v: IVec2,
+#[derive(Debug, Clone)]
+pub struct Robot {
+    pub p: IVec2,
+    pub v: IVec2,
 }
 
-fn parse_input(input: &str) -> Vec<Robot> {
+pub fn parse_input(input: &str) -> Vec<Robot> {
     fn i32(input: &str) -> IResult<&str, i32> {
         let (input, n) = recognize(preceded(opt(tag("-")), recognize(digit1)))(input)?;
 
@@ -48,7 +48,7 @@ fn parse_input(input: &str) -> Vec<Robot> {
     robots
 }
 
-fn solution_part_1(robots: &[Robot], size: IVec2) -> i32 {
+pub fn solution_part_1(robots: &[Robot], size: IVec2) -> i32 {
     let center = size / 2;
 
     robots
@@ -76,7 +76,7 @@ fn solution_part_1(robots: &[Robot], size: IVec2) -> i32 {
         .product()
 }
 
-fn solution_part_2(robots: &[Robot], size: IVec2) -> i32 {
+pub fn solution_part_2(robots: &[Robot], size: IVec2) -> i32 {
     let (i, easter_egg) = (0..i32::MAX)
         .map(|i| {
             robots
