@@ -4,7 +4,7 @@ use aoc_2024::input;
 use glam::*;
 use itertools::{FoldWhile, Itertools};
 
-trait MapAt {
+pub trait MapAt {
     fn at(&self, pos: IVec2) -> u8;
     fn set_at(&mut self, pos: IVec2, c: u8);
 }
